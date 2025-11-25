@@ -1,0 +1,147 @@
+To check git is installed or not 
+    git --version
+
+To install the git
+    apt install -y git
+
+To config the git to the local machine
+    git config --global user.name "<username of the git account>"
+    git config --global user.email <mail id of the git account>
+    git config --global core.editor vim
+
+To see all config ones
+    git config --list
+
+To config one in the path called "./git/config"
+    cat ./git/config
+
+To  make directory
+    mkdir <dir_name>
+
+get into the directory
+    cd <dir-name>
+Then initialize repository
+    git init
+to execute status command
+    git status
+now we can see the .git directory
+
+COMMIT THE FILE
+    1.It is the time to inform git, that we wish to stage our changes. to do so, execute command
+        git add <file-name>
+    2.then see the status
+        git status
+    3.It creates a new Git commit with the message.
+        git commit -m "what message should be display"
+
+REMOVE FILE FROM COMMIT
+    1.remove particular file from commit 
+        gir rm --cached <file-name>
+    2.to see status
+        git status
+    3.What if ,we have more files want remove from commit 
+        git rm --cached -r .
+    4.restore previous state of the file
+        We successfully reset the file to the state from previous commit, using git checkout. In this way we do the checkout of the last indexed state of this file on current branch.In similar way like in some scenarios before, we can remove all changes in one short command. Let's do it.
+        
+            git checkout .
+
+HEAD - HEAD is just a label that tells Git which commit you are standing on.
+
+    Text editor for create message for commit
+
+        git commit <file-name>
+
+To set vim as default editor
+    git config --global core.editor "vim"
+
+
+REVERT CHANGES 
+    Let's move ourselves back by one commit.
+
+    git revert --no-edit HEAD
+    The --no-edit flag tells Git to use the default commit message for the revert commit without opening an editor.
+
+    example:
+        What happens when you run it:
+
+Git looks at Commit A.
+        Creates a new commit that undoes whatever Commit A did.
+        Opens an editor so you can write a message for this new commit.
+    
+
+
+CHECK THE CHANGES BETWEEN COMMITS
+    git diff <commit id1> <commit id2>
+    git diff HEAD~1 HEAD
+
+git show - detailed information about a specific commit
+    git show 
+    git show <commit id>
+
+To see the detailed information of the previous commit
+    clear && git log --oneline
+    --oneline shows only most important info about commits. You have only hash and commit message.
+
+    To show ore details about last commits
+        git log -p
+
+    git log --stat
+
+    Maybe you wish to see the information sorted by author of the commits?
+        git shortlog
+
+
+    git log --graph
+    git log --oneline --graph 
+
+
+
+CONFLICT
+    Conflicts can happen. If some number of people are working on the same project, they might work on the same file at the sime time. And then, when you try to commit, or merge, you find out that something called conflict was created.
+
+
+    1.solve conflict    
+    #when combined two branches and found conflict in a file
+    2.open the file and resolve the conflict
+        git add <file-name>
+    3.commit the changes
+        git commit -m "message about conflict resolution"   
+    
+
+GIT TAG - A tag in Git is a label you attach to a specific commit. It's often used to mark important points in a project's history, like releases (e.g., v1.0, v2.0).
+To create a tag
+    git tag <tag-name>
+To create an annotated tag
+    git tag -a v1.0 -m "version 1.0"
+To see the details of a tag
+    git show <tag-name>
+To list all tags
+    git tag
+To delete a tag
+    git tag -d <tag-name>
+
+
+GIT BRANCH - A branch in Git is a separate line of development in a repository. It allows you to work on different features or fixes without affecting the main codebase (usually the "main" or "master" branch).
+To create a new branch
+    git branch <branch-name>
+To switch to a branch
+    git checkout <branch-name>
+To create and switch to a new branch in one command
+    git checkout -b <branch-name>
+To list all branches
+    git branch
+To delete a branch
+    git branch -d <branch-name>
+
+MERGE BRANCHES:
+    1.Switch to the branch you want to merge into (e.g., main)
+        git checkout main
+    2.Merge the other branch into the current branch
+        git merge <branch-name>
+    3.Resolve any conflicts if they arise, then commit the merge if necessary
+STASH - Git stash is a way to save your uncommitted changes temporarily so you can work on something else, and then come back and reapply those changes later.
+To stash your changes
+    git stash
+To list stashed changes
+    git stash list
