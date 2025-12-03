@@ -1,7 +1,8 @@
 Introduction Of Linux
 
 What is an Operating System?
-    The operating system (OS) is like a manager or middleman between your computer’s hardware (CPU, memory, hard drive) and the software (applications you run). It makes sure everything works together smoothly.
+
+The operating system (OS) is like a manager or middleman between your computer’s hardware (CPU, memory, hard drive) and the software (applications you run). It makes sure everything works together smoothly.
 
 Key Responsibilities of an OS
 
@@ -79,6 +80,7 @@ Boot Process
     Finally, the system presents a login prompt (text-based or graphical), allowing the user to log in and start using the system.
 
  Simple Example to Understand the Linux Boot Process – Restaurant Analogy
+ 
    - BIOS/UEFI → Checking the Restaurant: The manager inspects the kitchen, tables, and equipment to make sure everything works.
    - Bootloader (GRUB2) → Unpacking Ingredients: The chef opens the delivery boxes and decides what to cook first (loads the kernel).
    - Kernel Initialization → Setting Up the Kitchen: The chef arranges the tools, stove, and counters so cooking can begin (memory and process setup).
@@ -128,26 +130,28 @@ IMPORTANT DIRECTORIES
 
 ![Image](images/image3.png)
     
+    # Linux Directory Structure
+
     | Directory | Description | Purpose | Examples |
     |----------|-------------|----------|----------|
-    | /bin | Essential system binaries | Contains core commands required for basic system operation | ls, cp, cat, /bin/bash |
-    | /boot | Boot loader and kernel files | Required to boot the operating system | Kernel, initramfs, GRUB config |
-    | /dev | Device files | Interface to hardware and virtual devices | /dev/sda, /dev/null, /dev/tty |
-    | /etc | System configuration files | Stores system-wide service and system configs | /etc/nginx/, /etc/ssh/, /etc/systemd/ |
-    | /home | User home directories | Stores personal data for each user | /home/user1/, /home/user2/ |
-    | /lib | Shared libraries | Required by binaries and programs for execution | /lib/x86_64-linux-gnu/ |
-    | /media | Removable media mount | Auto-mounts USB, CD/DVD devices | /media/myusb |
-    | /mnt | Temporary mount point | Used for manual temporary filesystem mounting | /mnt/data |
-    | /opt | Optional third-party software | Stores external applications not managed by package manager | /opt/docker/ |
-    | /proc | Virtual kernel and process info | Provides runtime system details | /proc/cpuinfo, /proc/meminfo, /proc/uptime |
-    | /var | Variable files | Contains logs, cache, dynamic data | /var/log/, /var/cache/ |
-    | /usr | User applications & utilities | Non-essential binaries, libraries, docs | /usr/bin/, /usr/lib/ |
-    | /tmp | Temporary files | Used for temporary runtime storage | /tmp/ |
-    | /root | Root user's home directory | Home directory for system administrator | /root/ |
-    | /run | Runtime data | Temporary filesystem cleared on reboot | /run/ |
-    | /sbin | System binaries for admin | System management commands | ifconfig, reboot, mount, fsck |
-    | /srv | Service data | Files served by system services | /srv/www/, /srv/ftp/, /srv/mysql/ |
-    | /sys | Kernel and hardware interface | Real-time kernel information virtual filesystem | /sys/* |
+    | /bin     | Essential system binaries            | Core commands required for basic system operation             | ls, cp, cat, /bin/bash |
+    | /boot    | Boot loader and kernel files         | Required to boot the operating system                         | Kernel, initramfs, GRUB config |
+    | /dev     | Device files                         | Interface to hardware and virtual devices                     | /dev/sda, /dev/null, /dev/tty |
+    | /etc     | System configuration files           | System-wide configuration and service configs                 | /etc/nginx/, /etc/ssh/, /etc/systemd/ |
+    | /home    | User home directories                | Stores personal data for each user                            | /home/user1/, /home/user2/ |
+    | /lib     | Shared libraries                     | Required by binaries/programs for execution                   | /lib/x86_64-linux-gnu/ |
+    | /media   | Removable media mount point          | Auto-mounts USB/CD/DVD devices                                | /media/myusb |
+    | /mnt     | Temporary mount point                | Manual temporary filesystem mounting                          | /mnt/data |
+    | /opt     | Optional third-party software        | External applications not managed by package manager          | /opt/docker/ |
+    | /proc    | Virtual kernel/process info          | Runtime system and kernel details                             | /proc/cpuinfo, /proc/meminfo, /proc/uptime |
+    | /var     | Variable files                       | Logs, cache, dynamically changing data                        | /var/log/, /var/cache/ |
+    | /usr     | User applications & utilities        | Non-essential binaries, libraries, docs                       | /usr/bin/, /usr/lib/ |
+    | /tmp     | Temporary files                      | Temporary runtime storage                                     | /tmp/ |
+    | /root    | Root admin home directory            | Home directory for system administrator                       | /root/ |
+    | /run     | Runtime data                         | Temporary filesystem cleared on reboot                        | /run/ |
+    | /sbin    | System binaries for admin            | System management commands                                    | ifconfig, reboot, mount, fsck |
+    | /srv     | Service data                         | Files served by system services                               | /srv/www/, /srv/ftp/, /srv/mysql/ |
+    | /sys     | Kernel & hardware interface          | Real-time kernel information virtual filesystem               | /sys/* |
 
 #Example: Think of /sys like a control panel for your computer's hardware.
 
@@ -158,6 +162,7 @@ INODE
  - Inode have the metadta of file without the filename and directory path . 
     
 ## What an inode contains:
+
 - File type
 - User (UID)
 - Group (GID)
@@ -190,8 +195,10 @@ Output example:
     
 Inode Exhaustion
 
-Inode exhaustion happens when you run out of inodes, even though your disk still has free space. Inodes are like the "metadata" of files — they store information like file permissions, size, timestamps, and the actual data location on the disk.
-Each file, folder, and symbolic link on your system consumes one inode, and inodes are finite. If you have millions of small files, you can exhaust all inodes before you run out of actual disk space.
+ - Inode exhaustion happens when you run out of inodes, even though your disk still has free space. 
+ - Inodes are like the "metadata" of files — they store information like file permissions, size, timestamps, and the actual data location on the disk.
+ - Each file, folder, and symbolic link on your system consumes one inode, and inodes are finite. 
+ - If you have millions of small files, you can exhaust all inodes before you run out of actual disk space.
 
 How to detect inode exhaustion:
   1.Check overall inode usage:
@@ -204,11 +211,11 @@ How to detect inode exhaustion:
 Check overall inode usage:
 Find which directory is consuming all the inodes:
 To fix the issue:
-    Delete old files: Clean up old logs, caches, or temp files
-    Set up log rotation using logrotate
-    Clean package manager caches (apt clean or yum clean)
-    Clean Docker containers: docker system prune -af
-    Last resort: Recreate the filesystem with more inodes
+    -Delete old files: Clean up old logs, caches, or temp files
+    -Set up log rotation using logrotate
+    -Clean package manager caches (apt clean or yum clean)
+    -Clean Docker containers: docker system prune -af
+    -Last resort: Recreate the filesystem with more inodes
     
 
 Hard Link
@@ -237,17 +244,19 @@ Once it is created the two files different inode number.If original file is dele
 
 # Comparison Table: Hard Link vs Soft Link
     
-    | Feature | Hard Link | Soft Link (Symbolic Link) |
-    |--------|-----------|---------------------------|
-    | Points to | Inode of original file | Path of original file |
-    | Inode number | Same as original file | Different |
-    | Works after original file is deleted? | Yes | No (becomes broken) |
-    | Can link directories? | No | Yes |
-    | Works across different filesystems? | No | Yes |
-    | File content shared? | Yes (same data blocks) | No (only a pointer) |
-    | File type shown as | Regular file | Link (`ls -l` shows `l`) |
-    | Size | Same as file | Size = length of path |
-    | Command to create | `ln file1 file2` | `ln -s file1 file2` |
+# Hard Link vs Soft Link (Symbolic Link) Comparison
+
+    | Feature                             | Hard Link                     | Soft Link (Symbolic Link)       |
+    |-------------------------------------|-------------------------------|----------------------------------|
+    | Points to                           | Inode of original file        | Path of original file            |
+    | Inode number                        | Same as original file         | Different                        |
+    | Works after original file deletion  | Yes                           | No (becomes broken)              |
+    | Can link directories                | No                            | Yes                              |
+    | Works across different filesystems  | No                            | Yes                              |
+    | File content shared                 | Yes (same data blocks)        | No (only a pointer)              |
+    | File type shown as                  | Regular file                  | Link (`ls -l` shows `l`)         |
+    | Size                                | Same as actual file size      | Size = length of target path     |
+    | Command to create                   | `ln file1 file2`               | `ln -s file1 file2`              |
 
 Linux Commands
 
@@ -499,9 +508,9 @@ Redirection allows you to change where output goes or where input comes from.
 
 Error Redirection
     
- Standard Output (stdout) - normal output of the pogram
- Standard Error (stderr) - the default stream used by programs to send error messages or warnings.
- Standard Input (stdin) - the default stream where programs receive input data from the user or other programs.
+- Standard Output (stdout) - normal output of the pogram
+- Standard Error (stderr) - the default stream used by programs to send error messages or warnings.
+- Standard Input (stdin) - the default stream where programs receive input data from the user or other programs.
 
     
  2> Redirect stderr -  To redirect the error to a file 
@@ -509,7 +518,7 @@ Error Redirection
        
         ls demo_non_exist_file 2> error_log.txt
 
-&>    - Redirect Both stdout and stderr to the Same File
+ &>  - Redirect Both stdout and stderr to the Same File
     Example:
     
         ls <command-1> <command-2> &> err_log.txt
@@ -533,8 +542,9 @@ Error Redirection
 
 
 Regular Expressions (Regexp)
-  Regexps are acronyms for regular expressions. Regular expressions are special characters or sets of characters that help us to search for data and match the complex pattern.
-    A regular expression is a sequence of characters that defines a search pattern. These patterns can match:
+  - Regexps are acronyms for regular expressions. 
+  - Regular expressions are special characters or sets of characters that help us to search for data and match the complex pattern.
+  - A regular expression is a sequence of characters that defines a search pattern. These patterns can match:
         A specific string
         A pattern of characters
         A range of characters (e.g., digits, letters)
@@ -561,18 +571,21 @@ Wildcards
    #Here, grep matches any line containing at least one of the characters within [aeiou] (any vowel).
 
 3.Matching Zero or More Characters: * (Asterisk)
-    The asterisk * matches zero or more occurrences of the preceding character or group.
-         Example:
-                To match any line that contains the letter "d" followed by zero or more "o" characters and then "g" (like "dog","doog"."doghh",etc)
-                    grep "d*g" animals.txt
+
+The asterisk * matches zero or more occurrences of the preceding character or group.
+    Example:
+    To match any line that contains the letter "d" followed by zero or more "o" characters and then "g" (like "dog","doog"."doghh",etc)
+    
+        grep "d*g" animals.txt
                     
 Anchors
 
 1.Match lines starting with "dog" (^)
-    The caret ^ is used to match the beginning of a line, and the dollar sign $ is used to match the end of a line.
+    
+The caret ^ is used to match the beginning of a line, and the dollar sign $ is used to match the end of a line.
     Example:
-                
-    grep "^d" animals.txt
+        
+        grep "^d" animals.txt
     
 2.Matching lines endiing with "fish" ($)
     Example:
@@ -580,6 +593,7 @@ Anchors
         grep "fish$" <filename.txt>
 
 3. Combining Patterns:(\|)
+   
    Let’s say we want to match either 'cat' or 'dog'. You can use | to create an OR condition between patterns.
    Example:
 
@@ -609,7 +623,8 @@ Combining Patterns
 Zombie Process
 
 ZOMBIE PROCESS:
-    A zombie process is a process that has finished running, but still remains in the process table because its parent process hasn’t collected (waited for) its exit status.
+
+  A zombie process is a process that has finished running, but still remains in the process table because its parent process hasn’t collected (waited for) its exit status.
 
     Think of it like this:
         A child process dies 
