@@ -23,7 +23,9 @@ Simple example: Think of the OS as a restaurant manager: it organizes chefs (har
 Linux Architecture
 
 Linux has a layered structure that separates system responsibilities for better performance and control.
+
 ![Image](images/image1.png)
+
 Layers of Linux Architecture
 1. Hardware Layer
     Contains the physical components of the computer: CPU, Memory, Storage, Network Devices.The Linux system interacts with this layer using device drivers.
@@ -61,6 +63,7 @@ Layers of Linux Architecture
     Contains all programs and applications users interact with (browsers, editors, games, etc.).These programs use shell + system calls to access system resources.
 
 Boot Process
+
 ![Image](images/image2.png)
 
 1. BIOS/UEFI
@@ -85,7 +88,9 @@ Boot Process
    - Login Prompt → First Customer Arrives: The doors open, and the first customer walks in (user can log in and use the system).
 
 Linux As File System
-    Linux is often described as a "Linux as a File System" because everything in Linux is treated as a file—not just documents or images, but also devices, hardware, and even processes.
+
+Linux is often described as a "Linux as a File System" because everything in Linux is treated as a file—not just documents or images, but also devices, hardware, and even processes.
+
 1. Everything is a file
     Hard drives, USBs, keyboards, network connections → all are represented as files.
    
@@ -96,8 +101,10 @@ Linux As File System
     Linux has a single hierarchical directory structure (rooted at /).Devices, system info, and actual data all appear in this same tree.
 
         Example: /etc (configuration), /home (user files), /proc (process info), /dev (devices)
+
 3. File Permissions Control Everything
     Linux uses permissions on files to manage access to users, groups, and processes.This makes the OS secure and organized.
+
 4. Interaction via Files
     Programs interact with hardware and other resources as if they are reading/writing files.
 
@@ -106,39 +113,42 @@ This is why Linux is often called a file-system-oriented OS—because files are 
 
 Linux File Types
 
+
     | Type            | Symbol | Description                                  | Example                                     | Purpose                                                         |
-|-----------------|--------|----------------------------------------------|---------------------------------------------|-----------------------------------------------------------------|
-| Regular File    | -      | Normal data file (text, code, images, etc.)  | /home/user/report.txt                       | Store documents, scripts, or data                               |
-| Directory       | d      | Folder containing files                      | /etc                                        | Organize files and subfolders                                   |
-| Symbolic Link   | l      | Shortcut/alias to another file               | /usr/bin/python -> /usr/bin/python3.11      | Access files from multiple paths without duplication            |
-| Character Device| c      | Device that handles data character by character | /dev/ttyS0 (serial port)                    | Read/write one character at a time to devices like keyboards or mice |
-| Block Device    | b      | Device that handles data in blocks           | /dev/sda1 (hard drive partition)            | Efficient storage I/O, reads/writes large chunks of data        |
-| Socket          | s      | Endpoint for IPC communication               | /var/run/docker.sock                        | Allow programs to communicate locally or over the network       |
-| Pipe            | p      | Channel for communication between processes  | /tmp/mypipe                                 | One process writes data, another reads it                       |
+    |-----------------|--------|----------------------------------------------|---------------------------------------------|-----------------------------------------------------------------|
+    | Regular File    | -      | Normal data file (text, code, images, etc.)  | /home/user/report.txt                       | Store documents, scripts, or data                               |
+    | Directory       | d      | Folder containing files                      | /etc                                        | Organize files and subfolders                                   |
+    | Symbolic Link   | l      | Shortcut/alias to another file               | /usr/bin/python -> /usr/bin/python3.11      | Access files from multiple paths without duplication            |
+    | Character Device| c      | Device that handles data character by character | /dev/ttyS0 (serial port)                    | Read/write one character at a time to devices like keyboards or mice |
+    | Block Device    | b      | Device that handles data in blocks           | /dev/sda1 (hard drive partition)            | Efficient storage I/O, reads/writes large chunks of data        |
+    | Socket          | s      | Endpoint for IPC communication               | /var/run/docker.sock                        | Allow programs to communicate locally or over the network       |
+    | Pipe            | p      | Channel for communication between processes  | /tmp/mypipe                                 | One process writes data, another reads it                       |
 
 
 IMPORTANT DIRECTORIES
+
 ![Image](images/image3.png)
-| Directory | Description | Purpose | Examples |
-|----------|-------------|----------|----------|
-| /bin | Essential system binaries | Contains core commands required for basic system operation | ls, cp, cat, /bin/bash |
-| /boot | Boot loader and kernel files | Required to boot the operating system | Kernel, initramfs, GRUB config |
-| /dev | Device files | Interface to hardware and virtual devices | /dev/sda, /dev/null, /dev/tty |
-| /etc | System configuration files | Stores system-wide service and system configs | /etc/nginx/, /etc/ssh/, /etc/systemd/ |
-| /home | User home directories | Stores personal data for each user | /home/user1/, /home/user2/ |
-| /lib | Shared libraries | Required by binaries and programs for execution | /lib/x86_64-linux-gnu/ |
-| /media | Removable media mount | Auto-mounts USB, CD/DVD devices | /media/myusb |
-| /mnt | Temporary mount point | Used for manual temporary filesystem mounting | /mnt/data |
-| /opt | Optional third-party software | Stores external applications not managed by package manager | /opt/docker/ |
-| /proc | Virtual kernel and process info | Provides runtime system details | /proc/cpuinfo, /proc/meminfo, /proc/uptime |
-| /var | Variable files | Contains logs, cache, dynamic data | /var/log/, /var/cache/ |
-| /usr | User applications & utilities | Non-essential binaries, libraries, docs | /usr/bin/, /usr/lib/ |
-| /tmp | Temporary files | Used for temporary runtime storage | /tmp/ |
-| /root | Root user's home directory | Home directory for system administrator | /root/ |
-| /run | Runtime data | Temporary filesystem cleared on reboot | /run/ |
-| /sbin | System binaries for admin | System management commands | ifconfig, reboot, mount, fsck |
-| /srv | Service data | Files served by system services | /srv/www/, /srv/ftp/, /srv/mysql/ |
-| /sys | Kernel and hardware interface | Real-time kernel information virtual filesystem | /sys/* |
+    
+    | Directory | Description | Purpose | Examples |
+    |----------|-------------|----------|----------|
+    | /bin | Essential system binaries | Contains core commands required for basic system operation | ls, cp, cat, /bin/bash |
+    | /boot | Boot loader and kernel files | Required to boot the operating system | Kernel, initramfs, GRUB config |
+    | /dev | Device files | Interface to hardware and virtual devices | /dev/sda, /dev/null, /dev/tty |
+    | /etc | System configuration files | Stores system-wide service and system configs | /etc/nginx/, /etc/ssh/, /etc/systemd/ |
+    | /home | User home directories | Stores personal data for each user | /home/user1/, /home/user2/ |
+    | /lib | Shared libraries | Required by binaries and programs for execution | /lib/x86_64-linux-gnu/ |
+    | /media | Removable media mount | Auto-mounts USB, CD/DVD devices | /media/myusb |
+    | /mnt | Temporary mount point | Used for manual temporary filesystem mounting | /mnt/data |
+    | /opt | Optional third-party software | Stores external applications not managed by package manager | /opt/docker/ |
+    | /proc | Virtual kernel and process info | Provides runtime system details | /proc/cpuinfo, /proc/meminfo, /proc/uptime |
+    | /var | Variable files | Contains logs, cache, dynamic data | /var/log/, /var/cache/ |
+    | /usr | User applications & utilities | Non-essential binaries, libraries, docs | /usr/bin/, /usr/lib/ |
+    | /tmp | Temporary files | Used for temporary runtime storage | /tmp/ |
+    | /root | Root user's home directory | Home directory for system administrator | /root/ |
+    | /run | Runtime data | Temporary filesystem cleared on reboot | /run/ |
+    | /sbin | System binaries for admin | System management commands | ifconfig, reboot, mount, fsck |
+    | /srv | Service data | Files served by system services | /srv/www/, /srv/ftp/, /srv/mysql/ |
+    | /sys | Kernel and hardware interface | Real-time kernel information virtual filesystem | /sys/* |
 
 #Example: Think of /sys like a control panel for your computer's hardware.
 
@@ -210,18 +220,18 @@ Create soft link:
     ln -s <original_file> <new_file>
 
 # Comparison Table: Hard Link vs Soft Link
-
-| Feature | Hard Link | Soft Link (Symbolic Link) |
-|--------|-----------|---------------------------|
-| Points to | Inode of original file | Path of original file |
-| Inode number | Same as original file | Different |
-| Works after original file is deleted? | Yes | No (becomes broken) |
-| Can link directories? | No | Yes |
-| Works across different filesystems? | No | Yes |
-| File content shared? | Yes (same data blocks) | No (only a pointer) |
-| File type shown as | Regular file | Link (`ls -l` shows `l`) |
-| Size | Same as file | Size = length of path |
-| Command to create | `ln file1 file2` | `ln -s file1 file2` |
+    
+    | Feature | Hard Link | Soft Link (Symbolic Link) |
+    |--------|-----------|---------------------------|
+    | Points to | Inode of original file | Path of original file |
+    | Inode number | Same as original file | Different |
+    | Works after original file is deleted? | Yes | No (becomes broken) |
+    | Can link directories? | No | Yes |
+    | Works across different filesystems? | No | Yes |
+    | File content shared? | Yes (same data blocks) | No (only a pointer) |
+    | File type shown as | Regular file | Link (`ls -l` shows `l`) |
+    | Size | Same as file | Size = length of path |
+    | Command to create | `ln file1 file2` | `ln -s file1 file2` |
 
 Linux Commands
 
@@ -242,14 +252,16 @@ Allows you to change the current working directory.
     cd $HOME    # Go to home directory
 
 ls (List) - Lists files and directories in the current directory.
-    ls
-    ls ..           # List parent directory files
-    ls -a           # List all files (including hidden)
-    ls -l           # List with detailed information
-    ls -ltu         # List latest modified files at top
-    ls -ltc         # List by permission modification time
-    ls -s           # List sorted alphabetically
-    ls -al --author # List with author username
+        
+        ls
+        ls ..           # List parent directory files
+        ls -a           # List all files (including hidden)
+        ls -l           # List with detailed information
+        ls -ltu         # List latest modified files at top
+        ls -ltc         # List by permission modification time
+        ls -s           # List sorted alphabetically
+        ls -al --author # List with author username
+        
 tree - Shows tree level view of directories and files.
     
     tree
