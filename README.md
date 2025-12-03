@@ -1,8 +1,7 @@
 Introduction Of Linux
 
 What is an Operating System?
-
-An Operating System (OS) acts as a manager or intermediary between a computer's hardware (CPU, memory, storage) and the software (applications). It ensures smooth coordination between all components.
+    The operating system (OS) is like a manager or middleman between your computer’s hardware (CPU, memory, hard drive) and the software (applications you run). It makes sure everything works together smoothly.
 
 Key Responsibilities of an OS
 
@@ -154,10 +153,10 @@ IMPORTANT DIRECTORIES
 
 INODE
 # INODE
-
-An inode is a data structure on a Linux filesystem that stores everything about a file except its name.  
-Each file has its own unique inode.
-
+ - An inode is a data structure on a Linux filesystem that stores everything about a file except its name.
+ - Each file has one inode.
+ - Inode have the metadta of file without the filename and directory path . 
+    
 ## What an inode contains:
 - File type
 - User (UID)
@@ -167,6 +166,8 @@ Each file has its own unique inode.
 - File size
 - Number of hard links
 - Pointers to actual data blocks on disk
+
+ When create file ,inode is automatically assign to the file 
 
 ## Command to view inode details:
 
@@ -189,9 +190,17 @@ Output example:
     
 Inode Exhaustion
 
-Inode exhaustion happens when you run out of inodes, even though your disk still has free space. Each file, folder, and symbolic link consumes one inode, and inodes are finite.
+Inode exhaustion happens when you run out of inodes, even though your disk still has free space. Inodes are like the "metadata" of files — they store information like file permissions, size, timestamps, and the actual data location on the disk.
+Each file, folder, and symbolic link on your system consumes one inode, and inodes are finite. If you have millions of small files, you can exhaust all inodes before you run out of actual disk space.
 
 How to detect inode exhaustion:
+  1.Check overall inode usage:
+
+            df -i
+2.Find which directory is consuming all the inodes:
+            
+             du --inodes -x / | sort -n | tail
+             
 Check overall inode usage:
 Find which directory is consuming all the inodes:
 To fix the issue:
@@ -218,6 +227,13 @@ Soft Link (Symbolic Link)
 Create soft link:
 
     ln -s <original_file> <new_file>
+To see the link is
+        
+        ln -i <original file> <new file>
+Once it is created the two files different inode number.If original file is deleted,then soft link is broken ,we cannot access the backup file 
+
+#Because soft link points to the path, not the inode.
+        Original file gone → link broken.
 
 # Comparison Table: Hard Link vs Soft Link
     
@@ -236,12 +252,14 @@ Create soft link:
 Linux Commands
 
 Navigation Commands
+    pwd (Print Working Directory) - Displays the absolute path of the current working directory.
+        
+        Example:   
+            pwd 
+            output:
+                /root
+cd  (change Directory) - Allows you to change the current working directory to another directory
     
-    pwd (Print Working Directory)
-Displays the absolute path of the current working directory.
-pwd
-    
-    # Output: /root
     cd (Change Directory)
 Allows you to change the current working directory.
     
@@ -275,15 +293,24 @@ File Operations
 touch- Create File
 
     touch <filename>
-cat - Show File Content
-
-    cat <file_name>
-cp - Copy Files
+cat - it show content of the file
+        cat <file_name>
     
-    cp <source> <destination>
-mv - Move/Rename Files
+cp - copy file from one loaction to another location
 
-    mv <source> <destination>
+        cp <src directory_location> <destination_directory _lcoation>
+
+mv - move file from one location to another location
+
+        mv <src directory_location> <destination_directory _lcoation>
+
+rm - to remove the  file 
+
+        rm <filename>
+    
+rmdir -  to remove the empty directory
+
+        rmdir <filename>
 rm - Remove Files
 
     rm <filename>
@@ -291,6 +318,8 @@ rm - Remove Files
     rmdir <directory_name>
 
 Search & Filter
+
+grep - Search text inside files
 
     grep - Search Text Inside Files
     grep "error" /var/log/syslog
@@ -302,27 +331,37 @@ find - Find Files
     find / -name <filename>
     find /var/log -name "*.log"
     find /tmp -type f -mtime +7 -delete  # Delete files older than 7 days
-sed - Stream Editor
+sed - search & replace text inside files without opening file,it edit text automatically
+
+Example:
+
+            sed 's/old text/new text/' <filename>.txt  #s means substitution
+            sed's/banana/BANANA/g' fruits.txt   #g means all occurrence of the text
+            sed '2d' <filename.txt>     #to delete the two line 
+            sed 's/^/Line: /' <filename.txt> #to add the prefix "Line: " to each line in text.txt.
+            sed 's/old/new/' file.txt               # Replace first occurrence per line
+            sed '1,5d' filename.txt                    # Delete lines 1-5
+            sed -n '2p' filename.txt    #print line 2
+            sed '3i\New line' filename.txt              # Insert before line 3
+            sed '3a\New line' filename.txt              # Append after line 3
+            sed '/^$/d' data.txt        #to delete the empty line
+            sed 's/\([A-Za-z]*\) \([A-Za-z]*\)/\2 \1/' names.txt    #to swap the colunm word
+
+cut - It is used to extract specific columns or fields from a file or text. cut helps you extract specific columns or characters from text.It just prints the selected parts
+    Example:
     
-    sed 's/old text/new text/' file.txt      # Substitute text
-    sed 's/banana/BANANA/g' fruits.txt       # Replace all occurrences
-    sed '2d' file.txt                        # Delete line 2
-    sed 's/^/Line: /' file.txt              # Add prefix to each line
-    sed '/^$/d' data.txt                    # Delete empty lines
+            cut -d " " -f1 file.txt #show first row of the column (d-delimiter(space,colon,comma) ,f-field/column number)
+            echo "abcdef" | cut -c 1-3  #show ranges of character   (c- character positions)
+                outpu: abc
+            cut -b 1-4 filename.txt     #extract first 4 byte of each line
 
-cut - Extract Columns
+sort - Sort lines alphabetically or numerically
 
-    cut -d " " -f1 file.txt     # First field with space delimiter
-    echo "abcdef" | cut -c 1-3  # Extract characters 1-3
-    cut -b 1-4 filename.txt     # Extract first 4 bytes
-
-sort - Sort Lines
-    
     sort -n file.txt  # Sort numerically
     sort -r file.txt  # Sort in reverse
     sort -u file.txt  # Remove duplicates
 
-uniq - Filter Duplicate Lines
+uniq - The uniq command in Linux is used to filter out duplicate lines from a file or input.
 
     uniq file.txt     # Remove consecutive duplicates
     uniq -c file.txt  # Count occurrences
@@ -330,12 +369,29 @@ uniq - Filter Duplicate Lines
     uniq -u file.txt  # Show only unique lines
 
 Permissions
+ permissions control who can read, write, or execute a file. The three main commands to modify these permissions are:
+
+    chmod: Change file permissions.
+    chown: Change file ownership (user and group).
+    chgrp: Change the group of a file.
     
     chmod - Change File Permissions
-Permissions are defined for three categories:
-Owner (user who owns the file)
-Group (users in the file's group)
-Others (everyone else)
+
+ The chmod command is used to set or modify the permissions of a file or directory. Permissions are defined in three categories:
+
+        Owner (user who owns the file)
+        Group (users in the file's group)
+        Others (everyone else)
+
+Syntax:
+        
+        chmod [permission] [file]
+
+Permissions
+
+Permissions are specified using either symbolic mode (letters) or numeric mode (numbers).
+
+        
 Symbolic Mode:
     r → Read (4)
     w → Write (2)
@@ -344,11 +400,21 @@ Symbolic Mode:
     - → Remove permission
     = → Set exact permissions
     
-    chmod u+x file.txt      # Give owner execute permission
-    chmod g-w file.txt      # Remove write permission for group
-    chmod o+r file.txt      # Give others read permission
-    chmod a-x file.txt      # Remove execute for everyone
-    chmod u=rw,g=r,o=r file # Set specific permissions
+Add execute permission for the user:
+        
+        chmod u+x filename
+
+remove write permission for the group
+        
+        chmod g-w filename
+    
+Set read and write permissions for owner, and read for group and others:
+        
+        chmod u=rw,g=r,o=r filename
+        chmod u+x file.txt   # Give the owner execute permission
+        chmod g-w file.txt   # Remove write permission for the group
+        chmod o+r file.txt   # Give others read permission
+        chmod a-x file.txt   # Remove execute permission for everyone
 
 Numeric Mode:
     
@@ -359,33 +425,70 @@ Numeric Mode:
     chown user1:admin file.txt     # Change owner and group
     chown :admin file.txt          # Change group only
 
-chgrp - Change Group
+Change File Owner and Group (chown)
+    The chown command is used to change the owner and/or the group of a file or directory.    
+    Syntax:
 
-        chgrp developers file.txt
-    chgrp -R developers /path/to/directory  # Recursive
+    chown [owner][:group] [file]
 
-System Information
+    chown user1 file.txt      # Change owner to user1
+    chown user1:admin file.txt # Change owner to user1 and group to admin
+    chown :admin file.txt      # Change group to admin (no change to owner)
 
-    who - Show Logged Users
-    who
-    who | cut -d' ' -f1 | sort | uniq  # Count unique users
-    df - Disk Free Space
-    df -h  # Human-readable format
-    du - Disk Usage
-    du -sh  # Total for current directory
+
+chgrp - The chgrp command is specifically used to change the group ownership of a file or directory. It doesn't change the user (owner), only the group.
+
+
+Example:
+
+    chgrp group <filename>
+
+    chgrp developer <filename>
+    #This changes the group to developers ,leaving the owner unchanged
+
+    chgrp developers /path/to/directory
+    #change the group of the directory and all its files /subdirectories to developers
+
+
+chown -change the owner and group ownership 
+chgrp- change only the group ownership
+
+
+SYSTEM INFO:   
+
+who - The who command in Linux is used to display who is logged into the system at a given moment.
+       
+        who | cut -d' ' -f1 | sort | uniq   #    Count unique users logged in
     
-    uname - System Information
-    uname -a  # All system information
-    uname -s  # Kernel name
-    uname -r  # Kernel version
-    uname -m  # Hardware architecture
+df - Disk Free Space
+    The df command reports disk space usage for all mounted file systems.
+
+    Examples:
+        df -h
+du (disk usage)- The du command provides the disk usage of files and directories.
+Example:
+   
+    du -sh  #Display the total disk usage for the current directory
+The uname command shows detailed information about the system (like the kernel name, version, and hardware architecture).
+Example:   
+
+    uname [options]
+    -a → Show all system information
+    -s → Show kernel name
+    -r → Show kernel version
+    -m → Show machine hardware name (architecture)
+    -v → Show kernel version information
+    -p → Show processor type
 
 Pipe & Redirection
 Pipe (|) - Sends output of one command as input to another:
     
     ls -l | grep "txt"
 
-Output Redirection
+ 
+Redirection allows you to change where output goes or where input comes from.
+    >   #redirectly the output to a file ,overwriting the file if it already exists
+    >>  #redirect the output to a file,updating te file if it already exists
     
     > - Redirect output to file (overwrite)
     >> - Redirect output to file (append)
@@ -396,30 +499,101 @@ Output Redirection
 
 Error Redirection
     
-    2> - Redirect stderr
-    &> - Redirect both stdout and stderr
-    2>&1 - Redirect stderr to stdout
-    ls non_existent 2> error.log       # Redirect errors
-    ls file1 file2 &> all_output.txt   # Redirect all output
-    command 2> /dev/null               # Discard errors
+ Standard Output (stdout) - normal output of the pogram
+ Standard Error (stderr) - the default stream used by programs to send error messages or warnings.
+ Standard Input (stdin) - the default stream where programs receive input data from the user or other programs.
+
+    
+ 2> Redirect stderr -  To redirect the error to a file 
+    Example:
+       
+        ls demo_non_exist_file 2> error_log.txt
+
+&>    - Redirect Both stdout and stderr to the Same File
+    Example:
+    
+        ls <command-1> <command-2> &> err_log.txt
+        
+2>&1  - The expression 2>&1 is used to redirect the standard error (stderr) to the same place as the standard output (stdout).
+
+
+/dev/null   -   in output we didnot see any output
+    Example:
+    
+        ls > /dev/null
+#The normal output (the list of files and directories)is discarded because it's redirected to /dev/null.will not see any output in terminal
+
+    command 2> /dev/null                 # Discard stderr
+    Example: ls dem 2> /dev/null
+    command 2> /dev/null                 # Discard all
+    Example:    ls demo.txt &> /dev/null
+    
+<< is a here document (also known as a heredoc) operator. It tells the shell to accept multiple lines of input until it encounters the delimiter specified (in this case, EOF).
+
+
 
 Regular Expressions (Regexp)
-    Regular expressions are patterns used to match text. Commonly used with grep, sed, awk.
-    Wildcards
-    
-        . - Matches any single character
-        * - Matches zero or more of preceding character
-        [ ] - Matches any character in brackets
-        grep 'c.t' animals.txt          # cat, cut, cot, etc.
-        grep '[aeiou]' file.txt         # Lines with vowels
-        grep 'd*g' animals.txt          # dg, dog, doog, etc.
+  Regexps are acronyms for regular expressions. Regular expressions are special characters or sets of characters that help us to search for data and match the complex pattern.
+    A regular expression is a sequence of characters that defines a search pattern. These patterns can match:
+        A specific string
+        A pattern of characters
+        A range of characters (e.g., digits, letters)
 
+Regexps are most commonly used with the Linux commands :- grep,vi,sed ,tr
+Example:
+        
+        grep "<which text want to see>" <filename.txt>
+
+Wildcards
+    
+   1.   .  It is called wild card,It matches any one character other than new line
+        Example:
+            there is file called animals ,inside thers is animals names are mentioning ,If I donot any particular animal name ,just type any one letter after or before or middle type "." then it display ouptut which are related
+
+        Example:
+
+                grep 'c.t' animals.txt
+2.Matching range of characters [ ]:
+    This one match lines that contian any vowel,you can use:
+        Example:
+        
+            grep "[aeious]" <filename.txt>
+   #Here, grep matches any line containing at least one of the characters within [aeiou] (any vowel).
+
+3.Matching Zero or More Characters: * (Asterisk)
+    The asterisk * matches zero or more occurrences of the preceding character or group.
+         Example:
+                To match any line that contains the letter "d" followed by zero or more "o" characters and then "g" (like "dog","doog"."doghh",etc)
+                    grep "d*g" animals.txt
+                    
 Anchors
 
-    ^ - Beginning of line
-    $ - End of line
-    grep '^d' animals.txt   # Lines starting with 'd'
-    grep 'fish$' file.txt   # Lines ending with 'fish'
+1.Match lines starting with "dog" (^)
+    The caret ^ is used to match the beginning of a line, and the dollar sign $ is used to match the end of a line.
+    Example:
+                
+    grep "^d" animals.txt
+    
+2.Matching lines endiing with "fish" ($)
+    Example:
+        
+        grep "fish$" <filename.txt>
+
+3. Combining Patterns:(\|)
+   Let’s say we want to match either 'cat' or 'dog'. You can use | to create an OR condition between patterns.
+   Example:
+
+        grep "cat\|dog" animals.txt
+        grep "dog\|cat\|phant" animals.txt
+
+   awk -  used for text processing
+   
+        awk /<word or letter contain line to print>/ <filename.txt>
+        awk /a/ { print $1} data.txt    #print the first word (feild ) matching lines
+        awk '$2 ~ /apple/ { print }' data.txt  #to print the entire line in a specific field
+        awk '/^o/ data.txt  #to print Match Lines That Start with o letter or word
+        awk '/e$/' data.txt    #to print match lines end with e letter
+        awk '/sweet|orange/' dataa.txt  #to match multiple patterns using OR
 
 Combining Patterns
 
@@ -434,15 +608,29 @@ Combining Patterns
 
 Zombie Process
 
-A zombie process is a process that has finished running but remains in the process table because its parent process hasn't collected its exit status.
+ZOMBIE PROCESS:
+    A zombie process is a process that has finished running, but still remains in the process table because its parent process hasn’t collected (waited for) its exit status.
+
+    Think of it like this:
+        A child process dies 
+        The parent process should clean it up (using wait())
+        If the parent does not clean it up → the child becomes a zombie
+    
+#fork()-to create new process by duplicatying parent process.
+#wait()-system call used by the parent to read th exit status of its child.
 
 Check for zombies:
     ps aux | grep Z
 
-Kill parent process:
- This document provides a comprehensive introduction to Linux, covering fundamental concepts, architecture, file system, important directories, and essential commands for system administration and daily use.
+#TO TERMINATE ZOMBIE PROCESS WHEN RUNNING ZOMBIE PROCESS CODE
+1.Find zombie process
+
+    ps aux | grep defunct
+2.Find parent PID with help of child pid which is show previous output
+        
+    ps -o ppid= -p <zombie pid>
+    
+3.kill parent process
     
     kill -9 <parent_pid>
-
-    ps -o ppid= -p <zombie_pid>
     ps aux | grep defunct
