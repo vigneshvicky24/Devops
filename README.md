@@ -76,12 +76,12 @@ Boot Process
     Finally, the system presents a login prompt (text-based or graphical), allowing the user to log in and start using the system.
 
  Simple Example to Understand the Linux Boot Process – Restaurant Analogy
-    BIOS/UEFI → Checking the Restaurant: The manager inspects the kitchen, tables, and equipment to make sure everything works.
-    Bootloader (GRUB2) → Unpacking Ingredients: The chef opens the delivery boxes and decides what to cook first (loads the kernel).
-    Kernel Initialization → Setting Up the Kitchen: The chef arranges the tools, stove, and counters so cooking can begin (memory and process setup).
-    Init System (systemd) → Assigning Staff Tasks: The manager tells the waiters, cooks, and cleaners what to do and when (starting system processes).
-    System Services → Opening the Restaurant: Lights, ovens, and music start; everything is ready for customers (networking, printing, background services).
-    Login Prompt → First Customer Arrives: The doors open, and the first customer walks in (user can log in and use the system).
+   - BIOS/UEFI → Checking the Restaurant: The manager inspects the kitchen, tables, and equipment to make sure everything works.
+   - Bootloader (GRUB2) → Unpacking Ingredients: The chef opens the delivery boxes and decides what to cook first (loads the kernel).
+   - Kernel Initialization → Setting Up the Kitchen: The chef arranges the tools, stove, and counters so cooking can begin (memory and process setup).
+   - Init System (systemd) → Assigning Staff Tasks: The manager tells the waiters, cooks, and cleaners what to do and when (starting system processes).
+   - System Services → Opening the Restaurant: Lights, ovens, and music start; everything is ready for customers (networking, printing, background services).
+   - Login Prompt → First Customer Arrives: The doors open, and the first customer walks in (user can log in and use the system).
 
 Linux As File System
     Linux is often described as a "Linux as a File System" because everything in Linux is treated as a file—not just documents or images, but also devices, hardware, and even processes.
