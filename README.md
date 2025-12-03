@@ -23,11 +23,6 @@ using user accounts and permissions.
 
 \| OS \| Focus \| Strengths \| Weaknesses \|
 
-\| \-\-\-\-\-\-\-\-\-\-- \| \-\-\-\-\-\-\-\-\-\-- \|
-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
-\|
-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
-\|
 
 \| Windows \| GUI-focused \| Easy to use, lots of software \| Less
 secure, more resource-heavy \|
