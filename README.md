@@ -23,7 +23,7 @@ Simple example: Think of the OS as a restaurant manager: it organizes chefs (har
 Linux Architecture
 
 Linux has a layered structure that separates system responsibilities for better performance and control.
-
+![Image](images/image1.png)
 Layers of Linux Architecture
 1. Hardware Layer
     Contains the physical components of the computer: CPU, Memory, Storage, Network Devices.The Linux system interacts with this layer using device drivers.
@@ -61,6 +61,7 @@ Layers of Linux Architecture
     Contains all programs and applications users interact with (browsers, editors, games, etc.).These programs use shell + system calls to access system resources.
 
 Boot Process
+![Image](images/image2.png)
 
 1. BIOS/UEFI
     When you turn on the computer, the BIOS (older systems) or UEFI (newer systems) performs a Power-On Self Test (POST) to check hardware like CPU, RAM, keyboard, and drives.
@@ -117,7 +118,7 @@ Linux File Types
 
 
 IMPORTANT DIRECTORIES
-
+![Image](images/image3.png)
 | Directory | Description | Purpose | Examples |
 |----------|-------------|----------|----------|
 | /bin | Essential system binaries | Contains core commands required for basic system operation | ls, cp, cat, /bin/bash |
@@ -223,173 +224,213 @@ Create soft link:
 | Command to create | `ln file1 file2` | `ln -s file1 file2` |
 
 Linux Commands
+
 Navigation Commands
-pwd (Print Working Directory)
+    
+    pwd (Print Working Directory)
 Displays the absolute path of the current working directory.
 pwd
-# Output: /root
-cd (Change Directory)
+    
+    # Output: /root
+    cd (Change Directory)
 Allows you to change the current working directory.
-cd <directory_name>
-cd ..       # Go back to previous directory level
-cd ~        # Go to home directory
-cd -        # Go back to previous directory
-cd $HOME    # Go to home directory
-ls (List)
-Lists files and directories in the current directory.
-ls
-ls ..           # List parent directory files
-ls -a           # List all files (including hidden)
-ls -l           # List with detailed information
-ls -ltu         # List latest modified files at top
-ls -ltc         # List by permission modification time
-ls -s           # List sorted alphabetically
-ls -al --author # List with author username
-tree
-Shows tree level view of directories and files.
-tree
+    
+    cd <directory_name>
+    cd ..       # Go back to previous directory level
+    cd ~        # Go to home directory
+    cd -        # Go back to previous directory
+    cd $HOME    # Go to home directory
+
+ls (List) - Lists files and directories in the current directory.
+    ls
+    ls ..           # List parent directory files
+    ls -a           # List all files (including hidden)
+    ls -l           # List with detailed information
+    ls -ltu         # List latest modified files at top
+    ls -ltc         # List by permission modification time
+    ls -s           # List sorted alphabetically
+    ls -al --author # List with author username
+tree - Shows tree level view of directories and files.
+    
+    tree
+    
 File Operations
-mkdir - Create Directory
-mkdir <directory_name>
-mkdir -p /path/to/file  # Create parent directories if needed
-touch - Create File
-touch <filename>
+    
+    mkdir - Create Directory
+    mkdir <directory_name>
+    mkdir -p /path/to/file  # Create parent directories if needed
+
+touch- Create File
+
+    touch <filename>
 cat - Show File Content
-cat <file_name>
+
+    cat <file_name>
 cp - Copy Files
-cp <source> <destination>
+    
+    cp <source> <destination>
 mv - Move/Rename Files
-mv <source> <destination>
+
+    mv <source> <destination>
 rm - Remove Files
-rm <filename>
-rmdir - Remove Empty Directory
-rmdir <directory_name>
+
+    rm <filename>
+    rmdir - Remove Empty Directory
+    rmdir <directory_name>
+
 Search & Filter
-grep - Search Text Inside Files
-grep "error" /var/log/syslog
-grep -i "failed" auth.log       # Search ignoring case
-grep -r "nginx" /etc            # Search recursively
+
+    grep - Search Text Inside Files
+    grep "error" /var/log/syslog
+    grep -i "failed" auth.log       # Search ignoring case
+    grep -r "nginx" /etc            # Search recursively
+
 find - Find Files
-find / -name <filename>
-find /var/log -name "*.log"
-find /tmp -type f -mtime +7 -delete  # Delete files older than 7 days
+
+    find / -name <filename>
+    find /var/log -name "*.log"
+    find /tmp -type f -mtime +7 -delete  # Delete files older than 7 days
 sed - Stream Editor
-sed 's/old text/new text/' file.txt      # Substitute text
-sed 's/banana/BANANA/g' fruits.txt       # Replace all occurrences
-sed '2d' file.txt                        # Delete line 2
-sed 's/^/Line: /' file.txt              # Add prefix to each line
-sed '/^$/d' data.txt                    # Delete empty lines
+    
+    sed 's/old text/new text/' file.txt      # Substitute text
+    sed 's/banana/BANANA/g' fruits.txt       # Replace all occurrences
+    sed '2d' file.txt                        # Delete line 2
+    sed 's/^/Line: /' file.txt              # Add prefix to each line
+    sed '/^$/d' data.txt                    # Delete empty lines
+
 cut - Extract Columns
-cut -d " " -f1 file.txt     # First field with space delimiter
-echo "abcdef" | cut -c 1-3  # Extract characters 1-3
-cut -b 1-4 filename.txt     # Extract first 4 bytes
+
+    cut -d " " -f1 file.txt     # First field with space delimiter
+    echo "abcdef" | cut -c 1-3  # Extract characters 1-3
+    cut -b 1-4 filename.txt     # Extract first 4 bytes
+
 sort - Sort Lines
-sort -n file.txt  # Sort numerically
-sort -r file.txt  # Sort in reverse
-sort -u file.txt  # Remove duplicates
+    
+    sort -n file.txt  # Sort numerically
+    sort -r file.txt  # Sort in reverse
+    sort -u file.txt  # Remove duplicates
+
 uniq - Filter Duplicate Lines
-uniq file.txt     # Remove consecutive duplicates
-uniq -c file.txt  # Count occurrences
-uniq -d file.txt  # Show only duplicated lines
-uniq -u file.txt  # Show only unique lines
+
+    uniq file.txt     # Remove consecutive duplicates
+    uniq -c file.txt  # Count occurrences
+    uniq -d file.txt  # Show only duplicated lines
+    uniq -u file.txt  # Show only unique lines
+
 Permissions
-chmod - Change File Permissions
+    
+    chmod - Change File Permissions
 Permissions are defined for three categories:
 Owner (user who owns the file)
 Group (users in the file's group)
 Others (everyone else)
 Symbolic Mode:
-r → Read (4)
-w → Write (2)
-x → Execute (1)
-+ → Add permission
-- → Remove permission
-= → Set exact permissions
-chmod u+x file.txt      # Give owner execute permission
-chmod g-w file.txt      # Remove write permission for group
-chmod o+r file.txt      # Give others read permission
-chmod a-x file.txt      # Remove execute for everyone
-chmod u=rw,g=r,o=r file # Set specific permissions
+    r → Read (4)
+    w → Write (2)
+    x → Execute (1)
+    + → Add permission
+    - → Remove permission
+    = → Set exact permissions
+    
+    chmod u+x file.txt      # Give owner execute permission
+    chmod g-w file.txt      # Remove write permission for group
+    chmod o+r file.txt      # Give others read permission
+    chmod a-x file.txt      # Remove execute for everyone
+    chmod u=rw,g=r,o=r file # Set specific permissions
+
 Numeric Mode:
-chmod 755 file.txt  # rwxr-xr-x
-chmod 644 file.txt  # rw-r--r--
-chown - Change Owner and Group
-chown user1 file.txt           # Change owner to user1
-chown user1:admin file.txt     # Change owner and group
-chown :admin file.txt          # Change group only
+    
+    chmod 755 file.txt  # rwxr-xr-x
+    chmod 644 file.txt  # rw-r--r--
+    chown - Change Owner and Group
+    chown user1 file.txt           # Change owner to user1
+    chown user1:admin file.txt     # Change owner and group
+    chown :admin file.txt          # Change group only
+
 chgrp - Change Group
-chgrp developers file.txt
-chgrp -R developers /path/to/directory  # Recursive
+
+        chgrp developers file.txt
+    chgrp -R developers /path/to/directory  # Recursive
+
 System Information
-who - Show Logged Users
-who
-who | cut -d' ' -f1 | sort | uniq  # Count unique users
-df - Disk Free Space
-df -h  # Human-readable format
-du - Disk Usage
-du -sh  # Total for current directory
-uname - System Information
-uname -a  # All system information
-uname -s  # Kernel name
-uname -r  # Kernel version
-uname -m  # Hardware architecture
+
+    who - Show Logged Users
+    who
+    who | cut -d' ' -f1 | sort | uniq  # Count unique users
+    df - Disk Free Space
+    df -h  # Human-readable format
+    du - Disk Usage
+    du -sh  # Total for current directory
+    
+    uname - System Information
+    uname -a  # All system information
+    uname -s  # Kernel name
+    uname -r  # Kernel version
+    uname -m  # Hardware architecture
+
 Pipe & Redirection
-Pipe (|)
-Sends output of one command as input to another:
-ls -l | grep "txt"
+Pipe (|) - Sends output of one command as input to another:
+    
+    ls -l | grep "txt"
+
 Output Redirection
-> - Redirect output to file (overwrite)
->> - Redirect output to file (append)
-< - Redirect input from file
-echo "Hello" > output.txt      # Overwrite
-echo "World" >> output.txt     # Append
-wc -l < input.txt              # Count lines from file
+    
+    > - Redirect output to file (overwrite)
+    >> - Redirect output to file (append)
+    < - Redirect input from file
+    echo "Hello" > output.txt      # Overwrite
+    echo "World" >> output.txt     # Append
+    wc -l < input.txt              # Count lines from file
+
 Error Redirection
-2> - Redirect stderr
-&> - Redirect both stdout and stderr
-2>&1 - Redirect stderr to stdout
-ls non_existent 2> error.log       # Redirect errors
-ls file1 file2 &> all_output.txt   # Redirect all output
-command 2> /dev/null               # Discard errors
+    
+    2> - Redirect stderr
+    &> - Redirect both stdout and stderr
+    2>&1 - Redirect stderr to stdout
+    ls non_existent 2> error.log       # Redirect errors
+    ls file1 file2 &> all_output.txt   # Redirect all output
+    command 2> /dev/null               # Discard errors
+
 Regular Expressions (Regexp)
-Regular expressions are patterns used to match text. Commonly used with grep, sed, awk.
-Wildcards
-. - Matches any single character
-* - Matches zero or more of preceding character
-[ ] - Matches any character in brackets
-grep 'c.t' animals.txt          # cat, cut, cot, etc.
-grep '[aeiou]' file.txt         # Lines with vowels
-grep 'd*g' animals.txt          # dg, dog, doog, etc.
+    Regular expressions are patterns used to match text. Commonly used with grep, sed, awk.
+    Wildcards
+    
+        . - Matches any single character
+        * - Matches zero or more of preceding character
+        [ ] - Matches any character in brackets
+        grep 'c.t' animals.txt          # cat, cut, cot, etc.
+        grep '[aeiou]' file.txt         # Lines with vowels
+        grep 'd*g' animals.txt          # dg, dog, doog, etc.
+
 Anchors
-^ - Beginning of line
-$ - End of line
-grep '^d' animals.txt   # Lines starting with 'd'
-grep 'fish$' file.txt   # Lines ending with 'fish'
+
+    ^ - Beginning of line
+    $ - End of line
+    grep '^d' animals.txt   # Lines starting with 'd'
+    grep 'fish$' file.txt   # Lines ending with 'fish'
+
 Combining Patterns
-grep 'cat\|dog' animals.txt     # Match cat OR dog
-AWK - Text Processing
-awk '/pattern/' file.txt                    # Print matching lines
-awk '{print $1}' data.txt                   # Print first field
-awk '$2 ~ /apple/ {print}' data.txt        # Match field 2
-awk '/^o/' data.txt                        # Lines starting with 'o'
-awk '/e$/' data.txt                        # Lines ending with 'e'
-awk '/sweet|orange/' data.txt              # Multiple patterns
+
+    grep 'cat\|dog' animals.txt     # Match cat OR dog
+    AWK - Text Processing
+    awk '/pattern/' file.txt                    # Print matching lines
+    awk '{print $1}' data.txt                   # Print first field
+    awk '$2 ~ /apple/ {print}' data.txt        # Match field 2
+    awk '/^o/' data.txt                        # Lines starting with 'o'
+    awk '/e$/' data.txt                        # Lines ending with 'e'
+    awk '/sweet|orange/' data.txt              # Multiple patterns
+
 Zombie Process
+
 A zombie process is a process that has finished running but remains in the process table because its parent process hasn't collected its exit status.
+
 Check for zombies:
-ps aux | grep Z
+    ps aux | grep Z
 
-Terminating Zombie Process
-Find zombie process:
-Find parent PID:
 Kill parent process:
-This document provides a comprehensive introduction to Linux, covering fundamental concepts, architecture, file system, important directories, and essential commands for system administration and daily use.
-kill -9 <parent_pid>
-ps -o ppid= -p <zombie_pid>
-ps aux | grep defunct
+ This document provides a comprehensive introduction to Linux, covering fundamental concepts, architecture, file system, important directories, and essential commands for system administration and daily use.
+    
+    kill -9 <parent_pid>
 
-df -i
- 
- 
- 
- 
+    ps -o ppid= -p <zombie_pid>
+    ps aux | grep defunct
