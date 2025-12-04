@@ -6,12 +6,10 @@
 ### Feature Comparison Table
 
 | Feature            | root       | sudo                       |
-|--------------------|------------|----------------------------|
+|-------------------|------------|----------------------------|
 | Is it a user?      | Yes        | No (it's a command)        |
 | Unlimited power?   | Yes        | Yes, but temporarily       |
 | Security           | Risky      | Safer                      |
 | Logging of actions | No         | Yes                        |
 | Can be restricted? | No         | Yes (sudoers file)         |
-| Typical use        | System     | users doing admin tasks    |
-|admin               | Regular    |                            |
-----------------------------------------------------------------
+| Typical use        | System admin | Regular users doing admin tasks |
