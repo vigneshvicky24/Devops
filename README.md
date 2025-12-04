@@ -5,14 +5,14 @@
 
 ### Feature Comparison Table
 
-| Feature            | root       | sudo                       |
-|-------------------|------------|----------------------------|
-| Is it a user?      | Yes        | No (it's a command)        |
-| Unlimited power?   | Yes        | Yes, but temporarily       |
-| Security           | Risky      | Safer                      |
-| Logging of actions | No         | Yes                        |
-| Can be restricted? | No         | Yes (sudoers file)         |
-| Typical use        | System admin | Regular users doing admin tasks |
+    | Feature            | root       | sudo                       |
+    |-------------------|------------|----------------------------|
+    | Is it a user?      | Yes        | No (it's a command)        |
+    | Unlimited power?   | Yes        | Yes, but temporarily       |
+    | Security           | Risky      | Safer                      |
+    | Logging of actions | No         | Yes                        |
+    | Can be restricted? | No         | Yes (sudoers file)         |
+    | Typical use        | System admin | Regular users doing admin tasks |
 
 ## SSH Key-Based Authentication
 
@@ -36,17 +36,18 @@ When you connect:
 > **Public key can be shared with anyone.**
 
 1.To create the SSH key;
-ssh-keygen -t rsa -b 4096 -C "name@gmail.com
-|           |  |      |        └── comment (email/identifier)   
-|           |  |      |
-|           |  |      └── bit size (key strength)
-|           |  |       
-|           |  |
-|           |  |
-|           |  └── algorithm type
-|           └── type of key to create 
-|
-└── type of key to create
+
+    ssh-keygen -t rsa -b 4096 -C "name@gmail.com
+    |           |  |      |        └── comment (email/identifier)   
+    |           |  |      |
+    |           |  |      └── bit size (key strength)
+    |           |  |       
+    |           |  |
+    |           |  |
+    |           |  └── algorithm type
+    |           └── type of key to create 
+    |
+    └── type of key to create
 
 2. It asks a file location  
 3. It asks for a passphrase (optional)
@@ -66,12 +67,35 @@ File Paths:
 #with this ssh authentication ,no password is needed
 
 FLOW OF SSH AUTHENTICATES:
-Client (your laptop)        Server (Azure/Git/VM)
---------------------------------------------------------
-Sends request          --->    Checks if your PUBLIC key exists
-Server sends challenge <--- Needs private key to decode
-Client uses PRIVATE key to reply
-Server confirms match  --->  Access granted (login success)
-<img width="468" height="220" alt="image" src="https://github.com/user-attachments/assets/40a3dbfc-fec0-4a69-9fae-6ae473a5b587" />
+
+    Client (your laptop)        Server (Azure/Git/VM)
+    --------------------------------------------------------
+    1.Sends request          --->    Checks if your PUBLIC key exists
+    2.Server sends challenge <--- Needs private key to decode
+    3.Client uses PRIVATE key to reply
+    4.Server confirms match  --->  Access granted (login success)
+
+# USER AND GROUP MANAGEMENT:
+
+User and group management refers to creating, modifying, and controlling:
+
+### Users  
+People or system accounts that can log in.
+
+### Groups  
+Collections of users who share permissions.
+
+### Permissions  
+What a user/group can read (r-4), write (w-3), or execute (x-1).
+
+---
+
+## USERS:
+
+![Image](image/image1.png)
+
+### To create the user  
+
+
 
 
