@@ -37,6 +37,8 @@ When you connect:
 
 1.To create the SSH key;
 
+	  ssh-keygen -t rsa -b 4096 -C "name@gmail.com
+
     ssh-keygen -t rsa -b 4096 -C "name@gmail.com
     |           |  |      |        └── comment (email/identifier)   
     |           |  |      |
@@ -64,9 +66,9 @@ File Paths:
 3. Click **Add Key**
 4. Paste the content of the **public key** there → **Save**
 
-#with this ssh authentication ,no password is needed
+NOTE:with this ssh authentication ,no password is needed
 
-FLOW OF SSH AUTHENTICATES:
+###FLOW OF SSH AUTHENTICATES:
 
     Client (your laptop)        Server (Azure/Git/VM)
     --------------------------------------------------------
@@ -75,7 +77,7 @@ FLOW OF SSH AUTHENTICATES:
     3.Client uses PRIVATE key to reply
     4.Server confirms match  --->  Access granted (login success)
 
-# USER AND GROUP MANAGEMENT:
+# USER AND GROUP MANAGEMENT
 
 User and group management refers to creating, modifying, and controlling:
 
@@ -90,66 +92,64 @@ What a user/group can read (r-4), write (w-3), or execute (x-1).
 
 ---
 
-## USERS:
+## USERS
 
 ![Image](image/image1.png)
 
 
-To create the user 
+###To create the user 
 
 	useradd <username>
 
-To set the password to the user
+###To set the password to the user
 
 	passwd <username>
 
-To list of user account 
+###To list of user account 
 
 	getent passwd	(or)	cat /etc/passwd
 
 ![Image] (images/image2.png)
 
-To see the created user “ID”
+###To see the created user “ID”
 
 	id <username>
 
-To delete user account	
+###To delete user account	
 
 	userdel <filename>
-
-
 ---
-## GROUP:
+## GROUP
 
-To create the group:
+###To create the group:
 
     groupadd <group name>
 
-To add a user to a group:
+###To add a user to a group:
 
     usermod -aG <username> <groupname>
 
 
 ![Image](images/image3.png)
 
-To remove the user from the group:
+###To remove the user from the group:
 
     gpasswd -d <username> <group name>
-Example:
+###Example:
 
     gpasswd -d demo1 demogroup1
 
 
-To create the user with an associated group:
+###To create the user with an associated group:
     
     useradd -u 1550 -g <group-name> -G <secondary names,names> <new user_name>
 
     # 1550 – it is the user ID
-To delete group
+###To delete group
     	
         groupdel <groupname>
 
-Difference Between primary group & Secondary group
+###Difference Between primary group & Secondary group
 
 | Feature                  | Primary Group                                                          | Secondary Group                                                     |
 |-------------------------|------------------------------------------------------------------------|---------------------------------------------------------------------|
@@ -159,7 +159,7 @@ Difference Between primary group & Secondary group
 | Main Purpose            | Identifies user’s default group; used when user creates files          | Grants access to shared resources (directories, files, etc.)        |
 | Modification            | Can be changed using `usermod -g`                                      | Can be changed using `usermod -aG` (to add a user to a group)       |
 
-Differences between type of Users:
+###Differences between type of Users
 
 | Feature        | Root User                                                     | Regular Users                                                  | Service Users                                                             |
 |----------------|--------------------------------------------------------------|----------------------------------------------------------------|---------------------------------------------------------------------------|
@@ -171,7 +171,7 @@ Differences between type of Users:
 | Example Tasks  | System administration (installing software, managing users)   | Running applications, accessing files, working on code         | Running services (e.g., web server, database, cron jobs)                  |
 | Usage in DevOps| Rarely used directly (via sudo)                               | Common for CI/CD, deployments, troubleshooting                 | Configuring, managing, and securing application services                  |
 
-To get into created user 
+###To get into created user 
 
     	Su - <username>
         
@@ -181,14 +181,14 @@ To get into created user
 
 ##PASSWORD MANAGEMENT 
 
-To set password to user 
+###To set password to user 
 
     	Passwd <username>
 
-To change  password forcelly to user 
+###To change  password forcelly to user 
 	
     Passwd -e <username>
-To set password expiry data 
+###To set password expiry data 
     
     chage -M <days> <username> 	#MAX DAYS
 Example: 
@@ -197,7 +197,7 @@ Example:
     chage -m 3 demo1	#minimum days
     chage -W 14 demo1	
 
-To view password status
+###To view password status
 	
     chage -I demo1
 ![Image] (images/image6.png)
@@ -207,19 +207,19 @@ To view password status
 
 ![Image] (images/image8.png)
 
-Change the file permission 
+###Change the file permission 
 Example :
 
     Chmod 400 <filename.txt>
 
-To change the directory permission
+###To change the directory permission
 Example:
     
     Change [permissions] <directory name>
     
 ![Image] (images/image9.png)
 
-chown – It is a Linux command used to change the ownership of files and directories.
+##chown – It is a Linux command used to change the ownership of files and directories.
  
  Syntax: 
     
@@ -229,7 +229,7 @@ Group means group ownership
 
 ![Image] (images/image10.png)
 ---
-##PROCESS MANAGEMENT
+#PROCESS MANAGEMENT
 ![Image] (images/image5.png)
 
 What is Process?
