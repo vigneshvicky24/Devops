@@ -35,9 +35,8 @@ When you connect:
 > **Private key must never be shared.**  
 > **Public key can be shared with anyone.**
 
-1.To create the SSH key;
-
-	  ssh-keygen -t rsa -b 4096 -C "name@gmail.com
+### To create the SSH key;
+	ssh-keygen -t rsa -b 4096 -C "name@gmail.com
 
     ssh-keygen -t rsa -b 4096 -C "name@gmail.com
     |           |  |      |        └── comment (email/identifier)   
@@ -50,9 +49,8 @@ When you connect:
     |           └── type of key to create 
     |
     └── type of key to create
-
-2. It asks a file location  
-3. It asks for a passphrase (optional)
+### It asks a file location  
+### It asks for a passphrase (optional)
 
 File Paths:
   /.ssh/id_rsa.pub # public key
@@ -66,9 +64,9 @@ File Paths:
 3. Click **Add Key**
 4. Paste the content of the **public key** there → **Save**
 
-NOTE:with this ssh authentication ,no password is needed
+** NOTE:with this ssh authentication ,no password is needed **
 
-###FLOW OF SSH AUTHENTICATES:
+### FLOW OF SSH AUTHENTICATES:
 
     Client (your laptop)        Server (Azure/Git/VM)
     --------------------------------------------------------
@@ -111,17 +109,17 @@ What a user/group can read (r-4), write (w-3), or execute (x-1).
 
 ![Image] (images/image2.png)
 
-###To see the created user “ID”
+### To see the created user “ID”
 
 	id <username>
 
-###To delete user account	
+### To delete user account	
 
 	userdel <filename>
 ---
 ## GROUP
 
-###To create the group:
+### To create the group:
 
     groupadd <group name>
 
@@ -132,24 +130,24 @@ What a user/group can read (r-4), write (w-3), or execute (x-1).
 
 ![Image](images/image3.png)
 
-###To remove the user from the group:
+### To remove the user from the group:
 
     gpasswd -d <username> <group name>
-###Example:
+### Example:
 
     gpasswd -d demo1 demogroup1
 
 
-###To create the user with an associated group:
+### To create the user with an associated group:
     
     useradd -u 1550 -g <group-name> -G <secondary names,names> <new user_name>
 
-    # 1550 – it is the user ID
-###To delete group
+** 1550 – it is the user ID **
+### To delete group
     	
         groupdel <groupname>
 
-###Difference Between primary group & Secondary group
+### Difference Between primary group & Secondary group
 
 | Feature                  | Primary Group                                                          | Secondary Group                                                     |
 |-------------------------|------------------------------------------------------------------------|---------------------------------------------------------------------|
@@ -159,7 +157,7 @@ What a user/group can read (r-4), write (w-3), or execute (x-1).
 | Main Purpose            | Identifies user’s default group; used when user creates files          | Grants access to shared resources (directories, files, etc.)        |
 | Modification            | Can be changed using `usermod -g`                                      | Can be changed using `usermod -aG` (to add a user to a group)       |
 
-###Differences between type of Users
+### Differences between type of Users
 
 | Feature        | Root User                                                     | Regular Users                                                  | Service Users                                                             |
 |----------------|--------------------------------------------------------------|----------------------------------------------------------------|---------------------------------------------------------------------------|
@@ -171,7 +169,7 @@ What a user/group can read (r-4), write (w-3), or execute (x-1).
 | Example Tasks  | System administration (installing software, managing users)   | Running applications, accessing files, working on code         | Running services (e.g., web server, database, cron jobs)                  |
 | Usage in DevOps| Rarely used directly (via sudo)                               | Common for CI/CD, deployments, troubleshooting                 | Configuring, managing, and securing application services                  |
 
-###To get into created user 
+### To get into created user 
 
     	Su - <username>
         
@@ -179,47 +177,47 @@ What a user/group can read (r-4), write (w-3), or execute (x-1).
 
 ---
 
-##PASSWORD MANAGEMENT 
+## PASSWORD MANAGEMENT 
 
-###To set password to user 
+### To set password to user 
 
     	Passwd <username>
 
-###To change  password forcelly to user 
+### To change  password forcelly to user 
 	
     Passwd -e <username>
-###To set password expiry data 
+### To set password expiry data 
     
     chage -M <days> <username> 	#MAX DAYS
-Example: 
+### Example: 
     
     chage -M 60 demo1
     chage -m 3 demo1	#minimum days
     chage -W 14 demo1	
 
-###To view password status
+### To view password status
 	
     chage -I demo1
 ![Image] (images/image6.png)
 
 ---
-##FILE PERMISSION AND OWNERSHIP
+## FILE PERMISSION AND OWNERSHIP
 
 ![Image] (images/image8.png)
 
-###Change the file permission 
+### Change the file permission 
 Example :
 
     Chmod 400 <filename.txt>
 
-###To change the directory permission
+### To change the directory permission
 Example:
     
     Change [permissions] <directory name>
     
 ![Image] (images/image9.png)
 
-##chown – It is a Linux command used to change the ownership of files and directories.
+## chown – It is a Linux command used to change the ownership of files and directories.
  
  Syntax: 
     
@@ -229,7 +227,7 @@ Group means group ownership
 
 ![Image] (images/image10.png)
 ---
-#PROCESS MANAGEMENT
+# PROCESS MANAGEMENT
 ![Image] (images/image5.png)
 
 What is Process?
@@ -240,13 +238,13 @@ COMMANDS:
 1.ps -process status
 	
     Ps aux
-# a: all users
-# u: user-oriented format
-# x: include processes without controlling terminal
+** a: all users**
+** u: user-oriented format**
+** x: include processes without controlling terminal **
 
 ![Image] (images/image11.png)
 
-Explaination of Output
+### Explaination of Output
 | Column   | Meaning                                                           |
 |----------|-------------------------------------------------------------------|
 | USER     | The user who owns the process (root here)                         |
@@ -261,7 +259,7 @@ Explaination of Output
 | TIME     | Total CPU time consumed                                           |
 | COMMAND  | The command that started the process                              |
 
-To specific process
+### To specific process
 	
     ps -p <pID>
 
@@ -271,9 +269,8 @@ To specific process
 
 top- To see process,memory used in real time
 ![Image] (images/image13.png)
-
+### Explaination for top command output
 1.top - 17:41:12 up 1:55, 0 user, load average: 0.77, 0.43, 0.27
-Explaination
 
     | Part                        | Meaning                                                |
     |-----------------------------|--------------------------------------------------------|
@@ -316,26 +313,24 @@ Explaination
         | swap        | Hard-disk backup memory          |
 
 ---
-##PROCESS CONTROL
+## PROCESS CONTROL
 
 kill – used to stop or terminate processes by sending signals to them.
 
-    kill <pid>	#default  kill signal process
-    kill  -9 <pid>	 # forcefully kill the process
-    kill -1 <pid>	# Restart /reload configuration 
-    kill -STOP <pid> #pause /suspend process
-    kill -CONT <pid>  #Resume stopped process
-    kill -15 <pid> # gracefully kill process
-    killall <process_name> 	#kill all like nginx processes
-    pkill  -u <user>	#kill user’s process
-    Pkill -f  “python script.sh”	#kill by pattern
+	    kill <pid>	#default  kill signal process
+	    kill  -9 <pid>	 # forcefully kill the process
+	    kill -1 <pid>	# Restart /reload configuration 
+	    kill -STOP <pid> #pause /suspend process
+	    kill -CONT <pid>  #Resume stopped process
+	    kill -15 <pid> # gracefully kill process
+	    killall <process_name> 	#kill all like nginx processes
+	    pkill  -u <user>	#kill user’s process
+	    Pkill -f  “python script.sh”	#kill by pattern
 
 jobs - list background and suspended processes in current terminal.It does not change the state
-& - run a command in the background
-fg – foreground jobs
-bg – It is used to resume a stopped job in the background. It changes job state from stopped → running(background).
-
-bg – It is used to resume a stopped job in the background. It changes job state from stopped → running(background)
+** & - run a command in the background **
+** fg – foreground jobs **
+** bg – It is used to resume a stopped job in the background. It changes job state from stopped → running(background). **
 
 ![Image] (images/image15.png)
  
@@ -343,7 +338,6 @@ lsof – List Open Files
 It is a command used to view all open files and the processes using them in linux.
 To show which files are currently opened by processes in the system.
 
-	
 Example:
 	![Image] (images/image15.png)
 
@@ -364,7 +358,7 @@ Explaination
 lsof -I :80 	#check with process is using port 80
 lsof -u username	#files opened by a specificed user
 ---
-##SYSTEMCTL COMMANDS
+## SYSTEMCTL COMMANDS
 
 systemctl start <service_name>	#start service
 systemctl status <service_name> 	#check service is running 
@@ -375,38 +369,38 @@ systemctl enable  -–now  <service_name>	#Enable and start immediately
 systemctl disable --now <service_name>	#Disable and stop immediately
 systemctl mask nginx  	# mask = fully disable the service
 systemctl unmask ngnix	#unmask = allow service to start again
-#Listing
+# Listing
 systemctl list-unit-files 	#to list all installed unit files
 systemctl all units
 systemctl list-dependencies <service_name>	#show service dependencies
 
 ---
 
-##NETWORKING
+## NETWORKING
 Computer connect through together exchange the data is network
 Internet is a collection of the computer networks.
 ![Image] (images/image17.png)
 ---
-##CORE NETWORKING 
+### CORE NETWORKING 
 Ip Address:
 	IP address is phone book of internet. we basically remember the domain name and it will point to the computer or server of that IP address .Ip address is for understand for the Ip address.
 	It is unique address of the devices on a network
     
 ![Image] (images/image.png)
 
-Port Number:
-Ports tells which applications we are working with. 
+### Port Number
+** Ports tells which applications we are working with. **
 A port number is like a specific door on a computer or device that lets data in or out for certain services or applications .It helps organize the flow of information.
-Router:
+### Router
 Role of router is direct and manage the traffic between different devices and network.
 And also It is the one assign the Ip address to the devices.
 It protect the device from network by filtering the bad data.
 
-Packets:
+### Packets
 Packets are small chucks of data that through the network to reach their destination.
 With help of packets to send the data faster in the network and again combining the packet  to data with help of sequence number to correct order.
 
-How Networking works in Linux?
+### How Networking works in Linux?
 Simple analogy:
 •  Linux connects to network using Wi-Fi or cable (wlan0, eth0).
 •  It gets an IP address (like your house address).
@@ -416,7 +410,7 @@ Simple analogy:
 •  Website server sends packets back.
 •  Linux collects them and shows the page on your screen.
 
-##Flowchart
+## Flowchart
 
     When we type google.com
             ↓
@@ -434,10 +428,10 @@ Simple analogy:
             ↓
     Website appears on browser
     
-To check Ip addr
+### To check Ip addr
 	
     ip addr
-EXPLAINATION 
+### EXPLAINATION 
 1: lo: <LOOPBACK,UP,LOWER_UP> 
     inet 127.0.0.1/8
     inet6 ::1/128
@@ -450,7 +444,7 @@ EXPLAINATION
     inet6 fe80::9876:abcd:1234/64
     
 #loopback mean is a special IP address that allows a computer to send data to itself, effectively creating a virtual network interface.
-Explaination of ip addr
+### Explaination of ip addr
     
     | Line/Section              | Meaning (Simple)                                   |
     |---------------------------|----------------------------------------------------|
@@ -466,7 +460,7 @@ Explaination of ip addr
     | inet 10.0.0.5/24          | IPv4 address for Ethernet (if connected)           |
     | inet6 fe80::9876:.../64   | IPv6 for Ethernet                                  |
 
-To view interface
+### To view interface
 It displays network interfaces and their status (without IP addresses).
 	
     ip link show
@@ -490,11 +484,11 @@ DNS configuration:
     Cat /etc/resolv.conf
 
 Test DNS:
-	#nslookup google.com	#single DNS queries
-	#ding google.com	#Detailed DNS query tool
+	** nslookup google.com	#single DNS queries **
+	** ding google.com	#Detailed DNS query tool **
 
-ip route
-    It is used to view the routing table in linux.
+### ip route
+It is used to view the routing table in linux.
 Example:
     
     ip route
@@ -509,8 +503,8 @@ Output:
     | 192.168.1.0/24 dev wlan0 src 192.168.1.10        | Inside Local network 192.168.1.x uses wlan0 and the device’s IP is 192.168.1.10. |
 
 
-##Ping
-    It checks if another computer or website is reachable over a network
+## Ping
+It checks if another computer or website is reachable over a network
 Example:
     
     ping www.google.com
@@ -522,8 +516,8 @@ output
 •  Connection working
 •  Reply came in 22 milliseconds
 
-##Traceroute:
-    traceroute is a network tool that shows the path your data takes from your computer to another host (like google.com).
+## Traceroute:
+traceroute is a network tool that shows the path your data takes from your computer to another host (like google.com).
 Example
 
     traceroute google.com
@@ -536,31 +530,31 @@ Output:
      3  * * *
      4  * * *
      5  * * *
-Explaination
+### Explaination
 Hop 1 → 100.0.0.1
 •	This is your gateway/router
 •	Response time is very fast (0.03 ms)
 •	Means your local network is reachable
-•  Hop 2 → * * *
+Hop 2 → * * *
 •	The next router did not reply
 •	Could be because of:
 o	Firewall blocking ICMP
 o	Router not configured to respond
 o	Timeout/delay
 
-simple analogy:
-Post Office → City Center → Other City → Friend’s Home
+### simple analogy:
+** Post Office → City Center → Other City → Friend’s Home **
 ---
-##LINUX FIREWALL:
+## LINUX FIREWALL:
 The Linux firewall is a set of tools that control the flow of network traffic to and from your system. It filters packets based on predefined rules to secure the system from unwanted access or attacks.
 iptables -L lists all the rules in the firewall for controlling network traffic (incoming, outgoing, and forwarded).
 	    
         iptables -L
-#wget = download files,
-#curl = fetch data or interact with servers/APIs.
+** wget = download files, **
+** curl = fetch data or interact with servers/APIs. **
 
-CURL
-    Curl is like a browser without a screen — it fetches data from the internet directly in the terminal.
+### CURL
+Curl is like a browser without a screen — it fetches data from the internet directly in the terminal.
     
     | Task                  | Example                                      |
     |----------------------|-----------------------------------------------|
@@ -570,7 +564,7 @@ CURL
     | Test API             | `curl https://api.example.com/data`           |
 
 
-Wget 
+### Wget 
 Wget is a command-line tool used to download files from the internet.
 
     | Task                          | Example                                                |
@@ -581,24 +575,21 @@ Wget is a command-line tool used to download files from the internet.
     | Resume an interrupted download | `wget -c https://example.com/largefile.iso`           |
 
 
-SCP
-    SCP (Secure Copy) is a Linux command used to copy files or folders between two systems over a network securely using SSH encryption.
+### SCP
+SCP (Secure Copy) is a Linux command used to copy files or folders between two systems over a network securely using SSH encryption.
 Example:
-To copy file from local->remote server
-
+### To copy file from local->remote server
     scp file.txt user@remote_ip:/path/to/destination/
-Copy file from remote → local
-	
+### Copy file from remote → local
     scp user@remote_ip:/path/file.txt /local/path/
-Copy a folder (use -r for recursive)
-	
+### Copy a folder (use -r for recursive)
     scp -r myfolder/ user@remote_ip:/path/destination/
 
-rsync:
+## rsync
 The main use of rsync is to copy and synchronize files/folders efficiently between locations — locally or between two machines.
 Used for backup, mirroring, syncing files locally or remotely.
 
-##Difference between cp and rsync
+## Difference between cp and rsync
 
     | Feature                  | cp (copy)                     | rsync                                |
     |--------------------------|------------------------------|---------------------------------------|
@@ -609,28 +600,25 @@ Used for backup, mirroring, syncing files locally or remotely.
     | Speed                    | Slower for repeated tasks    | Faster (transfer only changes)        |
 
 
-Example:
+Example
 Imagine you have a project folder with 10,000 files
 You want to backup it daily to another drive or server.
 •	If you use cp, it will copy everything again → takes long time
 •	If you use rsync, it copies only new or modified files → very fast
 
-Syntax:    
-    
+### Syntax
     rsync [options] source/ destination/
 Example:
-1.To local copy (same machine)
+### 1.To local copy (same machine)
     
     rsync -av /home/user/docs/ /home/user/backup/
-2.Copy to remote server:
+### 2.Copy to remote server:
 	
     rsync [options] source/ user@remote_host:/path/
 Example: rsync -av project/ user@192.168.1.10:/var/www/project/
-3.Copy from remote server to local machine
-	
+### 3.Copy from remote server to local machine
     rsync [options] user@remote_host:/path/ destination/
-Example:
-	
+### Example:
     rsync -av user@192.168.1.10:/var/logs/ /home/user/logs/
 
         
@@ -643,7 +631,7 @@ Example:
     | -z       | Compress data while transfer over network                   |
     | --delete | Delete files in destination that don't exist in source      |
 
-    
+ ### 
     | Command                     | Description                                         |
     |----------------------------|------------------------------------------------------|
     | sudo apt update            | Refreshes package list from repositories             |
@@ -666,7 +654,7 @@ Example:
     | sudo apt autoclean         | Removes outdated cache files                         |
     
     
-dpkg - Low-level Package Tool
+### dpkg - Low-level Package Tool
 dpkg (Debian Package) is a low-level package management tool used in Debian-based systems like Ubuntu for installing, removing, and managing .deb packages` manually.
 
     | Command                      | Short Description                                  | Small Example                        |
@@ -678,7 +666,7 @@ dpkg (Debian Package) is a low-level package management tool used in Debian-base
     | dpkg -S /path/file          | Finds which package owns a specific file           | dpkg -S /usr/sbin/nginx              |
     | sudo apt --fix-broken install | Fixes broken dependencies after dpkg installation | sudo apt --fix-broken install        |
     
-YUM/DNF Package Manager
+### YUM/DNF Package Manager
 
     | Command                                      | Description                                 | Small Example            |
     |----------------------------------------------|--------------------------------------------------|--------------------------|
@@ -692,11 +680,11 @@ YUM/DNF Package Manager
 
 ---
 
-##SYSTEM MONITORING
+## SYSTEM MONITORING
 
 1.free – show the memory usage and available memory
 ![Image] (images/image19.png)
-
+### Explaination of output 
 •	Total: Total physical RAM
 •	Used: Used RAM
 •	Free: Completely unused RAM
@@ -704,105 +692,100 @@ YUM/DNF Package Manager
 •	Buff/cache: Disk cache (reclaimable) or RAM used for buffering/caching files to speed up system performance. It can be freed when needed
 •	Available: Memory available for applications or Shows how much memory is actually available to new programs, considering cache can be reused.
 ---
-df -disk space
-Show disk usage (human-readable)
-    
+### df -disk space
+### Show disk usage (human-readable) 
     df -h
-Show inodes
-    
+### Show inode
     df -i
-Show specific filesystem type
-
+### Show specific filesystem type
     df -t ext4
-Show specific mount point
-    
+### Show specific mount point
     df -h /var
-Exclude filesystem type
-
+### Exclude filesystem type
     df -x tmpfs
 ![Image] (images/image.png)
-# overlay is the main filesystem in container environment
+### overlay is the main filesystem in container environment
 
-# uptime – System Update
+### uptime – System Update
 Example:
 	Uptime		#show uptime and load average
 
-# vmstat – Virtual Memory Statistics
+### vmstat – Virtual Memory Statistics
 It is a command used in Linux/Unix to monitor the overall system performance such as 
     CPU Usage
     Memory (RAM) usage
     Swap usage
     Disk IO, Processes
     System interrupts & context switches
-# Example	
+### Example	
     vmstat
-# Update every 2 seconds
+### Update every 2 seconds
 	vmstat 2
-# 10 samples, 2 seconds apart
+### 10 samples, 2 seconds apart
 	vmstat 2 10
 ![Image] (images/image21.png)
-# Disk statistics
+### Disk statistics
 	vmstat -d
-# Active/inactive memory
+### Active/inactive memory
 	vmstat -a
 ![Image] (images/image22.png)
 
-du -Directory Usage
-# To size of directory
+### du -Directory Usage
+### To size of directory
     du -sh /var/log
-# To show all files and directories
+### To show all files and directories
 	du -ah /var/log
-# Sort by size
+### Sort by size
 	du -ah /var/log | sort -rh | head -10
-# Show only directories
+### Show only directories
 	du -h -d 1 /var | sort -rh
 
-# I/O Statistics
+## I/O Statistics
 It is performance monitoring tool in linux used to analyze 
     CPU usage
     Disk I/O (read/write activity)
     Device performance
     Storage bottlenecks.
-# Example
+### Example
 	iostat
-# Update every 2 second
+### Update every 2 second
 	iostat -x 2
-# Specific device
+### Specific device
 	iostat -x /dev/sda
 
-# LOGGING Log are stored in the path called “/var/log”
+### LOGGING Log are stored in the path called “/var/log”
 
-# To view entire log
+### To view entire log
 	Cat /var/log/syslog
-# View last 50 lines
+### View last 50 lines
 	tail -n 50 /var/log/syslog
-# Follow multiple logs
+### Follow multiple logs
 	Tail -f /var/log/syslog /var/log/auth.log
-# View first 20 lines
+### View first 20 lines
 	Head -n 20 /var/log/syslog
 
-# Journalclt
+## Journalclt
 It is used to view and analyze system logs collected by systemd-journald in Linux.
 It helps you check system events, boot logs, service errors, failures, crashes, warnings, and application logs.
 It is used to read system and service logs for debugging, monitoring, and troubleshooting issues in Linux.
-# Example:
+### Example:
 	Journalctl
 
-Cron – Task Scheduling
+## Cron – Task Scheduling
 ![Image] (images/image23.png)
 
-# To edit crontab
+### To edit crontab
 	crontab -e
-# List crontab
+### List crontab
 	Crontab -l
-# Remove crontab
+### Remove crontab
 	Cron -r
-# Edit for specific user
+### Edit for specific user
 	Crontab -u <username> -e
 Example:
-# Every Wednesday at 10AM
+### Every Wednesday at 10AM
     0 10 * * * /path/to/script.sh
-# Multiple times
+### Multiple times
      0 8,13,19 * * * /path/to/script.sh
 
 
