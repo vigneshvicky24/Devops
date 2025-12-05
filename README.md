@@ -64,7 +64,7 @@ File Paths:
 3. Click **Add Key**
 4. Paste the content of the **public key** there → **Save**
 
-** NOTE:with this ssh authentication ,no password is needed **
+**NOTE:with this ssh authentication ,no password is needed**
 
 ### FLOW OF SSH AUTHENTICATES:
 
@@ -95,57 +95,45 @@ What a user/group can read (r-4), write (w-3), or execute (x-1).
 ![Image](image/image1.png)
 
 
-###To create the user 
-
+### To create the user 
 	useradd <username>
 
-###To set the password to the user
-
+### To set the password to the user
 	passwd <username>
 
-###To list of user account 
-
+### To list of user account 
 	getent passwd	(or)	cat /etc/passwd
 
 ![Image] (images/image2.png)
 
 ### To see the created user “ID”
-
 	id <username>
 
 ### To delete user account	
-
 	userdel <filename>
 ---
 ## GROUP
 
 ### To create the group:
-
     groupadd <group name>
 
-###To add a user to a group:
-
+### To add a user to a group:
     usermod -aG <username> <groupname>
 
 
 ![Image](images/image3.png)
 
 ### To remove the user from the group:
-
     gpasswd -d <username> <group name>
 ### Example:
-
     gpasswd -d demo1 demogroup1
 
-
 ### To create the user with an associated group:
-    
-    useradd -u 1550 -g <group-name> -G <secondary names,names> <new user_name>
+	useradd -u 1550 -g <group-name> -G <secondary names,names> <new user_name>
 
-** 1550 – it is the user ID **
+**1550 – it is the user ID**
 ### To delete group
-    	
-        groupdel <groupname>
+    groupdel <groupname>
 
 ### Difference Between primary group & Secondary group
 
@@ -170,8 +158,7 @@ What a user/group can read (r-4), write (w-3), or execute (x-1).
 | Usage in DevOps| Rarely used directly (via sudo)                               | Common for CI/CD, deployments, troubleshooting                 | Configuring, managing, and securing application services                  |
 
 ### To get into created user 
-
-    	Su - <username>
+	su - <username>
         
 ![Image] (/images/image4.png)
 
@@ -180,23 +167,18 @@ What a user/group can read (r-4), write (w-3), or execute (x-1).
 ## PASSWORD MANAGEMENT 
 
 ### To set password to user 
-
-    	Passwd <username>
+	Passwd <username>
 
 ### To change  password forcelly to user 
-	
-    Passwd -e <username>
+	Passwd -e <username>
 ### To set password expiry data 
-    
     chage -M <days> <username> 	#MAX DAYS
-### Example: 
-    
+### Example:    
     chage -M 60 demo1
     chage -m 3 demo1	#minimum days
     chage -W 14 demo1	
 
 ### To view password status
-	
     chage -I demo1
 ![Image] (images/image6.png)
 
@@ -230,17 +212,16 @@ Group means group ownership
 # PROCESS MANAGEMENT
 ![Image] (images/image5.png)
 
-What is Process?
-
+### What is Process?
 Process is the running instance of the program
 Example : when work on anything in the computer behind see process is running 
+
 COMMANDS:
-1.ps -process status
-	
+### ps -process status	
     Ps aux
-** a: all users**
-** u: user-oriented format**
-** x: include processes without controlling terminal **
+**a: all users**
+**u: user-oriented format**
+**x: include processes without controlling terminal**
 
 ![Image] (images/image11.png)
 
@@ -260,7 +241,6 @@ COMMANDS:
 | COMMAND  | The command that started the process                              |
 
 ### To specific process
-	
     ps -p <pID>
 
     ps -ef
@@ -315,8 +295,7 @@ top- To see process,memory used in real time
 ---
 ## PROCESS CONTROL
 
-kill – used to stop or terminate processes by sending signals to them.
-
+### kill – used to stop or terminate processes by sending signals to them.
 	    kill <pid>	#default  kill signal process
 	    kill  -9 <pid>	 # forcefully kill the process
 	    kill -1 <pid>	# Restart /reload configuration 
@@ -328,9 +307,9 @@ kill – used to stop or terminate processes by sending signals to them.
 	    Pkill -f  “python script.sh”	#kill by pattern
 
 jobs - list background and suspended processes in current terminal.It does not change the state
-** & - run a command in the background **
-** fg – foreground jobs **
-** bg – It is used to resume a stopped job in the background. It changes job state from stopped → running(background). **
+**& - run a command in the background**
+**fg – foreground jobs**
+**bg – It is used to resume a stopped job in the background. It changes job state from stopped → running(background).**
 
 ![Image] (images/image15.png)
  
@@ -382,7 +361,7 @@ Internet is a collection of the computer networks.
 ![Image] (images/image17.png)
 ---
 ### CORE NETWORKING 
-Ip Address:
+Ip Address
 	IP address is phone book of internet. we basically remember the domain name and it will point to the computer or server of that IP address .Ip address is for understand for the Ip address.
 	It is unique address of the devices on a network
     
@@ -429,7 +408,6 @@ Simple analogy:
     Website appears on browser
     
 ### To check Ip addr
-	
     ip addr
 ### EXPLAINATION 
 1: lo: <LOOPBACK,UP,LOWER_UP> 
@@ -438,7 +416,6 @@ Simple analogy:
 2: wlan0: <BROADCAST,MULTICAST,UP,LOWER_UP>
     inet 192.168.1.10/24
     inet6 fe80::abcd:1234:5678/64
-
 3: eth0: <NO-CARRIER,BROADCAST,MULTICAST,UP>
     inet 10.0.0.5/24
     inet6 fe80::9876:abcd:1234/64
@@ -464,10 +441,9 @@ Simple analogy:
 It displays network interfaces and their status (without IP addresses).
 	
     ip link show
-Example:
-
-    #ip addr – phone number on phone
-    #ip link show – The phone device details itself 
+Example
+    **ip addr – phone number on phone**
+    **ip link show – The phone device details itself**
 
 Output
 
@@ -478,22 +454,19 @@ Output
     3: wlan0: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default 
         link/ether ab:cd:ef:12:34:56 brd ff:ff:ff:ff:ff:ff
 ---
-##DNS (Domain Name Space):
-DNS configuration:
-
+## DNS (Domain Name Space):
+### To see DNS configuration
     Cat /etc/resolv.conf
 
 Test DNS:
-	** nslookup google.com	#single DNS queries **
-	** ding google.com	#Detailed DNS query tool **
+	**nslookup google.com	#single DNS queries**
+	**ding google.com	#Detailed DNS query tool**
 
 ### ip route
 It is used to view the routing table in linux.
-Example:
-    
+### Example
     ip route
-Output:
-
+### Output
     default via 192.168.1.1 dev wlan0 proto dhcp metric 600
     192.168.1.0/24 dev wlan0 proto kernel scope link src 192.168.1.10 metric 600
 
@@ -505,11 +478,9 @@ Output:
 
 ## Ping
 It checks if another computer or website is reachable over a network
-Example:
-    
+### Example:
     ping www.google.com
-output
-
+### output
 	64 bytes from 142.250.xxx.xxx: time=22 ms
 
 •  Received reply
@@ -518,11 +489,9 @@ output
 
 ## Traceroute:
 traceroute is a network tool that shows the path your data takes from your computer to another host (like google.com).
-Example
-
+### Example
     traceroute google.com
-Output:
-    
+### Output:
     traceroute google.com
     traceroute to google.com (142.250.183.46), 30 hops max, 60 byte packets
      1  172.17.0.1 (172.17.0.1)  0.039 ms  0.026 ms  0.051 ms
@@ -543,15 +512,15 @@ o	Router not configured to respond
 o	Timeout/delay
 
 ### simple analogy:
-** Post Office → City Center → Other City → Friend’s Home **
+**Post Office → City Center → Other City → Friend’s Home**
 ---
 ## LINUX FIREWALL:
 The Linux firewall is a set of tools that control the flow of network traffic to and from your system. It filters packets based on predefined rules to secure the system from unwanted access or attacks.
 iptables -L lists all the rules in the firewall for controlling network traffic (incoming, outgoing, and forwarded).
 	    
         iptables -L
-** wget = download files, **
-** curl = fetch data or interact with servers/APIs. **
+**wget = download files**
+**curl = fetch data or interact with servers/APIs.**
 
 ### CURL
 Curl is like a browser without a screen — it fetches data from the internet directly in the terminal.
@@ -603,8 +572,8 @@ Used for backup, mirroring, syncing files locally or remotely.
 Example
 Imagine you have a project folder with 10,000 files
 You want to backup it daily to another drive or server.
-•	If you use cp, it will copy everything again → takes long time
-•	If you use rsync, it copies only new or modified files → very fast
+**If you use cp, it will copy everything again → takes long time**
+**If you use rsync, it copies only new or modified files → very fast**
 
 ### Syntax
     rsync [options] source/ destination/
@@ -631,7 +600,8 @@ Example: rsync -av project/ user@192.168.1.10:/var/www/project/
     | -z       | Compress data while transfer over network                   |
     | --delete | Delete files in destination that don't exist in source      |
 
- ### 
+ ### APT Package Manager (Debian/Ubuntu)
+
     | Command                     | Description                                         |
     |----------------------------|------------------------------------------------------|
     | sudo apt update            | Refreshes package list from repositories             |
